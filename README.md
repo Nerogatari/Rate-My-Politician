@@ -1,4 +1,17 @@
 # CPSC304Project_project_e2k1l_l2y0b_u5r2b
+
+## Installation
+### Running the server
+1. Install node.js
+2. Use npm to install oracledb and express. (nodemon is optional but very useful while coding)
+3. ssh into remote.students.cs.ubc.ca and use SQL*Plus to run siteResetTable.sql
+4. ssh into remote.students.cs.ubc.ca using xshell (or whatever other tool you want) and create a tunnel from localhost with port 1522 to dbhost.students.cs.ubc.ca port 1522.
+![tunnel_0](./README_imgs/tunnel_0.jpg)
+![tunnel_1](./README_imgs/tunnel_1.jpg) 
+5. In Database.js, change user and password in dbConfig object.
+6. Use 'node server.js' or 'npx nodemon server.js' to start server.
+7. in browser go to http://localhost:3000/.
+
 Timeline: 
 
 April 1 2020: Project implementation 
