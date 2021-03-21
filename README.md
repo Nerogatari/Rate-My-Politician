@@ -4,13 +4,14 @@
 ### Running the server
 1. Install node.js
 2. Use npm to install oracledb and express. (nodemon is optional but very useful while coding)
-3. ssh into remote.students.cs.ubc.ca and use SQL*Plus to run siteResetTable.sql
-4. ssh into remote.students.cs.ubc.ca using xshell (or whatever other tool you want) and create a tunnel from localhost with port 1522 to dbhost.students.cs.ubc.ca port 1522.
+3. Follow https://oracle.github.io/node-oracledb/INSTALL.html#quickstart and install oracle instant client light.
+4. ssh into remote.students.cs.ubc.ca and use SQL*Plus to run siteResetTable.sql (see tutorial 5 for how to do)
+5. ssh into remote.students.cs.ubc.ca using xshell (or whatever other tool you want) and create a tunnel from localhost with port 1522 to dbhost.students.cs.ubc.ca port 1522. (see tutorial 6 for how to do)
 ![tunnel_0](./README_imgs/tunnel_0.jpg)
 ![tunnel_1](./README_imgs/tunnel_1.jpg) 
-5. In Database.js, change user and password in dbConfig object.
-6. Use 'node server.js' or 'npx nodemon server.js' to start server.
-7. in browser go to http://localhost:3000/.
+6. In Database.js, change user and password in dbConfig object.
+7. Use 'node server.js' or 'npx nodemon server.js' to start server.
+8. in browser go to http://localhost:3000/.
 
 Timeline: 
 
