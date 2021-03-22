@@ -23,6 +23,7 @@ app.use(logRequest);							// logging for debug
 // route the pages to each respective folder
 app.use('/', express.static(clientApp, { extensions: ['html'] }));
 app.use('/addPol', express.static(clientApp+'/addPol', { extensions: ['html'] }));
+app.use('/pol/:politicianID', express.static(clientApp+'/pol', { extensions: ['html'] }));
 
 
 app.listen(port, () => {
