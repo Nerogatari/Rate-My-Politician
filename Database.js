@@ -9,14 +9,21 @@ const dbConfig = {
   password: 'a31699168',
   connectString: 'localhost:1522/stu',
 }
-
-async function getPoliticians() {
+/*
+If politicianID not specified, return all politicians
+*/
+async function getPoliticians(politicianID) {
   let connection;
-
   try {
     connection = await oracledb.getConnection(dbConfig);
     console.log('connected');
-    const result = await connection.execute(`SELECT * FROM Politician`);
+    let result;
+    if(politicianID == undefined){
+      result = await connection.execute(`SELECT * FROM Politician`);
+    }
+    else{
+      result = await connection.execute(`SELECT * FROM Politician WHERE PoliticianID = :politicianID`, [politicianID]);
+    }
     console.log(result);
     return result;
   } catch (err) {
@@ -36,7 +43,6 @@ Add politician, rating is set to 0 by default
 */
 async function addPolitician(politicianid,party, fname, lname) {
   let connection;
-
   try {
     connection = await oracledb.getConnection(dbConfig);
     console.log('connected');
