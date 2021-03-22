@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const express = require('express');
 const Database = require('./Database.js');
+const { addPolitician } = require('./Database.js');
 
 function logRequest(req, res, next){
 	console.log(`${new Date()}  ${req.ip} : ${req.method} ${req.path}`);
@@ -19,21 +20,34 @@ app.use(express.json()) 						// to parse application/json
 app.use(express.urlencoded({ extended: true })) // to parse application/x-www-form-urlencoded
 app.use(logRequest);							// logging for debug
 
-// serve static files (client-side)
+// route the pages to each respective folder
 app.use('/', express.static(clientApp, { extensions: ['html'] }));
+app.use('/addPol', express.static(clientApp+'/addPol', { extensions: ['html'] }));
+
+
 app.listen(port, () => {
 	console.log(`${new Date()}  App Started. Listening on ${host}:${port}, serving ${clientApp}`);
 });
 
-app.route('/submit-form')
-	.post(async (req, res) =>{
+/*
+Add polticiian page functions
+*/
+app.post('/addPol/submit-form',async (req, res) =>{
 		try{
 			var formData = req.body;
-			console.log(formData);
+			//try to add a Party first since there is constraint on poltician where party must exist
+			try{
+				await Database.addParty(formData['party'], formData['foundedYear'], formData['politicalLeaningScore']);
+			}catch(err){
+				console.log(err);
+			}
+
 			await Database.addPolitician(formData['pid'], formData['party'], formData['fname'], formData['lname']);
-			let politicians = await Database.getPoliticians();
-			console.log(politicians);
 		}catch(err){
 			console.log(err);
+		}finally{
+			let politicians = await Database.getPoliticians();
+			console.log(politicians);
+			res.redirect('/addPol');
 		}
-	})
+	});

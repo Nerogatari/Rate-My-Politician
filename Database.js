@@ -1,3 +1,7 @@
+/*
+Database library, used for function calls to db
+*/
+
 const oracledb = require('oracledb');
 oracledb.autoCommit = true;
 const dbConfig = {
@@ -54,7 +58,38 @@ async function addPolitician(politicianid,party, fname, lname) {
   }
 }
 
+/*
+Add a Party
+*/
+async function addParty(partyName, foundedYear, politicalLeaningScore){
+  let connection;
+
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+    console.log('connected');
+    const result = await connection.execute(`INSERT INTO Party VALUES ( :partyName, :foundedYear, :politicalLeaningScore)`,
+      [partyName, foundedYear, politicalLeaningScore]
+    );
+    console.log(result);
+    return result;
+  } catch (err) {
+    throw (err);
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        throw (err);
+      }
+    }
+  }
+}
+
+/*
+Make sure to export all functions you want visible to other files
+*/
 module.exports = {
   getPoliticians: getPoliticians,
-  addPolitician: addPolitician
+  addPolitician: addPolitician,
+  addParty: addParty
 }
