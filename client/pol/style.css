@@ -1,0 +1,7 @@
+#party > * { 
+  display: inline-block;
+}
+
+#rating > * {
+  display: inline-block;
+}
