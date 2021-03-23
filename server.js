@@ -31,7 +31,7 @@ app.listen(port, () => {
 });
 
 /*
-Add polticiian page functions
+Add poltician page endpoints
 */
 app.post('/addPol/submit-form',async (req, res) =>{
 		try{
@@ -42,7 +42,7 @@ app.post('/addPol/submit-form',async (req, res) =>{
 			}catch(err){
 				console.log(err);
 			}
-
+			//add politician
 			await Database.addPolitician(formData['pid'], formData['party'], formData['fname'], formData['lname']);
 		}catch(err){
 			console.log(err);
@@ -52,3 +52,15 @@ app.post('/addPol/submit-form',async (req, res) =>{
 			res.redirect('/addPol');
 		}
 	});
+
+/*
+Politician page Endpoints
+*/
+
+app.get('/pol/:polID/info', async (req, res)=>{
+	let polID = req.params['polID'];
+	Database.getPoliticians(polID).then((result)=>{
+		res.json(result.rows[0]);
+	})
+	.catch((err) =>{throw new Error(`Can't get politician with polID:` + polID + `. ${err}`)});
+});

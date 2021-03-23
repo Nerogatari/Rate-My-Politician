@@ -24,7 +24,7 @@ async function getPoliticians(politicianID) {
     else{
       result = await connection.execute(`SELECT * FROM Politician WHERE PoliticianID = :politicianID`, [politicianID]);
     }
-    console.log(result);
+    //console.log(result);
     return result;
   } catch (err) {
     throw (err);
