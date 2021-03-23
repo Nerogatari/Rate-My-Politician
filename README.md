@@ -1,5 +1,14 @@
 # CPSC304Project_project_e2k1l_l2y0b_u5r2b
 
+##SQL queries Checklist
+1. Insertion: add a politician into the politician table (done)
+2. Deletion: Delete an article which mentions a Politician
+3. Update: Update the Political Leaning score of the party
+4. Selection Select all the politicians who belong to Liberal Party
+5. Projection: Select the rating, First Name, Last Name of all the politicians
+6. Join: Select the Names of the Politicians and their associated party names
+7. Division: Find all the accounts that rate all the politicians
+
 ## Installation
 ### Running the server
 1. Install node.js
