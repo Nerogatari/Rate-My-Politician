@@ -16,7 +16,6 @@ async function getPoliticians(politicianID) {
   let connection;
   try {
     connection = await oracledb.getConnection(dbConfig);
-    console.log('connected');
     let result;
     if(politicianID == undefined){
       result = await connection.execute(`SELECT * FROM Politician`);
@@ -45,7 +44,6 @@ async function addPolitician(politicianid,party, fname, lname) {
   let connection;
   try {
     connection = await oracledb.getConnection(dbConfig);
-    console.log('connected');
     const result = await connection.execute(`INSERT INTO Politician VALUES (:id, :party, :fname, :lname, :rating)`,
       [politicianid, party,fname, lname, '0']
     );
@@ -72,7 +70,6 @@ async function addParty(partyName, foundedYear, politicalLeaningScore){
 
   try {
     connection = await oracledb.getConnection(dbConfig);
-    console.log('connected');
     const result = await connection.execute(`INSERT INTO Party VALUES ( :partyName, :foundedYear, :politicalLeaningScore)`,
       [partyName, foundedYear, politicalLeaningScore]
     );
