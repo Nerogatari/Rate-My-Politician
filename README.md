@@ -1,4 +1,4 @@
-# CPSC304Project_project_e2k1l_l2y0b_u5r2b
+# Rate My Politician
 
 ##SQL queries Checklist
 1. Insertion: add a politician into the politician table (done)
